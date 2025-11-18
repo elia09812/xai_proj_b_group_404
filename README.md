@@ -2,9 +2,10 @@
 
 ### Test image naming conventions
 - `StudentID`
-  - 001: Elia Maximilian Stamm
-  - 010: Dominic Christopher Schlegel
-  - 100: Magdalena Klug
+  - FRPK: Elia Maximilian Stamm
+  - QJTR: Dominic Christopher Schlegel
+  - MZLA: Magdalena Klug
 - `PhoneID`
   - 00001: iPhone 13 Pro
   - 00010: Xiaomi Note 11
+  - 00100: Google Pixel 8 Pro
