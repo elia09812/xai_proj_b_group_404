@@ -10,6 +10,43 @@ from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
 
+class ImageNetSubset(Dataset):
+    def __init__(self, root, transform=None):
+        self.root = root
+        self.file_names = sorted(
+            f for f in os.listdir(self.root)
+            if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+        )
+        self.labels_map = {
+            'coffee-mug': 0,
+            'notebook': 1,
+            'remote-control': 2,
+            'soup-bowl': 3,
+            'teapot': 4,
+            'wooden-spoon': 5,
+            'computer-keyboard': 6,
+            'mouse': 7,
+            'binder': 8,
+            'toilet-tissue': 9,
+        }
+        self.transform = transform
+        
+    
+    def __getitem__(self, idx):
+        img_name = self.file_names[idx]
+        img_path = os.path.join(self.root, img_name)
+
+        label_str = img_name.split('_')[0]
+        label = torch.tensor(self.labels_map[label_str], dtype=torch.long)
+
+        image = Image.open(img_path).convert("RGB")
+        image = self.transform(image)
+
+        return image, label
+    
+    def __len__(self):
+        return len(self.file_names)
+
 class CustomImageDataset(Dataset):
     def __init__(self, root_dir, transform=None):
         """
@@ -51,9 +88,8 @@ class CustomImageDataset(Dataset):
 
         return image, label
     
-from torch.utils.data import DataLoader
-from torchvision import transforms
 
+'''
 # Transformationen definieren (z. B. fürs Training)
 transform = transforms.Compose([
     transforms.Resize((64, 64)),
@@ -78,3 +114,4 @@ print("erste 5 class-names:", [idx_to_class[int(i)] for i in labels[:5]])
 print(images.shape)   # z.B. torch.Size([32, 3, 64, 64])
 print(labels.shape)   # z.B. torch.Size([32])
 print(labels.dtype)   # z.B. torch.int64
+'''
