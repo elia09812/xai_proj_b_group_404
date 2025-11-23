@@ -9,3 +9,4 @@
   - 00001: iPhone 13 Pro
   - 00010: Xiaomi Note 11
   - 00100: Google Pixel 8 Pro
+  - 01000: iPhone 16 e
