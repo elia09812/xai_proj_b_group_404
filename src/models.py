@@ -23,8 +23,8 @@ class SimpleCNN(nn.Module):
 
         # 2) Linear "classifier" head
         self.classifier = nn.Sequential(
-            nn.Flatten(),                                # [B,128,16,16] -> [B, 128*16*16]
-            nn.Linear(128 * 16 * 16, 256),
+            nn.Flatten(),                                # [B,128,32,32] -> [B, 128*32*32]
+            nn.Linear(128 * 32 * 32, 256),
             nn.ReLU(),
             nn.Linear(256, num_classes),
         )
