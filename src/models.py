@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class SimpleCNN(nn.Module):
     def __init__(self, num_classes=10):
         super().__init__()
@@ -23,8 +24,8 @@ class SimpleCNN(nn.Module):
 
         # 2) Linear "classifier" head
         self.classifier = nn.Sequential(
-            nn.Flatten(),                                # [B,128,16,16] -> [B, 128*16*16]
-            nn.Linear(128 * 16 * 16, 256),
+            nn.Flatten(),                                # [B,128,32,32] -> [B, 128*32*32]
+            nn.Linear(128 * 32 * 32, 256),
             nn.ReLU(),
             nn.Linear(256, num_classes),
         )
@@ -35,7 +36,7 @@ class SimpleCNN(nn.Module):
         return x
     
 class LargerNet(nn.Module):
-    def __init__(self, in_channels=3, num_classes=10, dropout_p=0.5):
+    def __init__(self, in_channels=3, num_classes=10, dropout_p=0.2):
         super().__init__()
 
         # Block 1
@@ -50,15 +51,22 @@ class LargerNet(nn.Module):
         self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
         self.bn3 = nn.BatchNorm2d(128)
 
-        # Globale Durchschnittspool-Lösung: funktioniert für jede Bildauflösung
+        # automatically calculates the right kernel size, stride, and padding 
+        # -> produce a specific output size
         self.gap = nn.AdaptiveAvgPool2d((1, 1))
 
-        # FC + Dropout
-        self.dropout = nn.Dropout(dropout_p)
-        self.fc = nn.Linear(128, num_classes)
+        # FC1
+        self.fc1 = nn.Linear(in_features=128, out_features=120)
 
-        # Gemeinsamer Pool
+        # FC2
+        self.fc2 = nn.Linear(in_features=120, out_features=84)
+
+        # FC3
+        self.fc3 = nn.Linear(in_features=84, out_features=num_classes)
+
+        # Gemeinsamer Pool & Dropout
         self.pool = nn.MaxPool2d(2, 2)
+        self.dropout = nn.Dropout(dropout_p)
 
     def forward(self, x):
         x = self.pool(F.relu(self.bn1(self.conv1(x))))
@@ -69,5 +77,12 @@ class LargerNet(nn.Module):
         x = x.view(x.size(0), -1)   # (B,128)
 
         x = self.dropout(x)
-        x = self.fc(x)
+        x = F.relu(self.fc1(x))
+
+        x = self.dropout(x)
+        x = F.relu(self.fc2(x))
+
+        x = self.dropout(x)
+        x = F.sigmoid(self.fc3(x))
+
         return x
