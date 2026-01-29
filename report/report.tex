@@ -68,9 +68,9 @@
   Magda \\
   Otto-Friedrich University of Bamberg\\
   96049 Bamberg, Germany\\
-  \texttt{max.mustermann@stud.uni-bamberg.de} \\[0.5cm]
-  Seminar: xAI-Sem-?? \\
-  Degree: M.Sc. (CitH/AI/\dots) \\
+  \texttt{magdalena\_klug@stud.uni-bamberg.de} \\[0.5cm]
+  Proejct: xAI-Proj-B \\
+  Degree: B.Sc. AI \\
   Matriculation \#: 12345678
   % Coauthor \\
   % Affiliation \\
@@ -118,12 +118,77 @@ Please read the instructions below carefully and follow them faithfully. Those i
 
 \subsection{Data Augmentation (E)}
 \subsection{Architectures (E)}
+\begin{itemize}
+\item SimpleNet
+\item LargerNet
+\item ResNet
+\end{itemize}
 \subsection{Training (M)}
-\subsection{Metrics (M)}
+Model training was conducted using the Adam optimizer with an initial learning rate of 0.0001. To ensure optimal convergence and prevent overfitting, we employed a learning rate scheduler and an early stopping mechanism. 
 
-\section{Experiments}
+The learning rate scheduler implemented a ReduceLROnPlateau strategy, which reduces the learning rate by a factor of 0.5 when the validation loss fails to decrease over a patience period of 2 epochs. This adaptive learning rate adjustment enables finer gradient updates as the model approaches convergence.
+
+Early stopping was applied to halt training when model performance on the validation set ceased to improve. Specifically, training was terminated if the validation loss did not decrease by a minimum delta of 0.1 over a patience period of 5 epochs. This approach prevents overfitting while minimizing computational overhead.
+
+The training procedure followed an iterative process over multiple epochs: each epoch consisted of a training phase followed by validation. Subsequently, performance metrics were computed and logged, the learning rate scheduler was invoked to adjust the learning rate if necessary, model checkpoints were saved if the current validation metrics have been better than previous epochs and the early stopping criterion was evaluated to determine training continuation.
+\subsection{Evaluation Metrics (M)}
+Model performance was assessed using multiple evaluation metrics to provide a comprehensive analysis of classification quality.
+\subsubsection{Accuracy}
+Accuracy was calculated as the percentage of correct predictions relative to the total number of predictions. For binary or multi-class classification, accuracy is defined as:
+
+\begin{equation}
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation}
+
+where $TP$, $TN$, $FP$, and $FN$ represent true positives, true negatives, false positives, and false negatives, respectively. In the context of this study, the confusion matrix extends to $10 \times 10$ dimensions, accommodating all class predictions.
+
+\subsubsection{ROC and AUC}
+Receiver Operating Characteristic (ROC) curve analysis and the corresponding Area Under the Curve (AUC) were employed to evaluate the model's ability to distinguish between classes. For multi-class classification, we adopted a One-vs-Rest (OvR) approach, calculating individual ROC curves for each class against all other classes. The True Positive Rate (TPR) and False Positive Rate (FPR) for each class were computed as:
+
+\begin{equation}
+\text{TPR} = \frac{TP}{TP + FN}
+\end{equation}
+
+\begin{equation}
+\text{FPR} = \frac{FP}{FP + TN}
+\end{equation}
+
+The overall model performance was quantified using the weighted-averaged AUC, which computes the weighted mean of individual class AUC values, thereby treating all classes regarding their sample size. This approach provides a balanced assessment of model performance across all classes.
+
+\section{Experiments (M)}
+Table~\ref{tab:training_results} summarizes the training results for each of the implemented neural network architectures.
+
+\begin{table}[h]
+\centering
+\caption{Training results on validation data for different neural network architectures with and without data augmentation.}
+\label{tab:training_results}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Model} & \multicolumn{2}{c}{\textbf{SimpleCNN}} & \multicolumn{2}{c}{\textbf{LargerNet}} & \multicolumn{2}{c}{\textbf{ResNet}} \\
+\cline{2-7}
+\textbf{Augmentation} & Yes & No & Yes & No & Yes & No \\
+\hline
+Epochs trained & 30 & 8 & 300 & 91 & 300 & 300 \\
+Learning Rate & 0.0001 & 0.00005 & $1.5 \times 10^{-8}$ & $1.5 \times 10^{-8}$ & $1.5 \times 10^{-8}$ & $1.5 \times 10^{-8}$ \\
+Loss Difference & 1.154 & 6.794 & 0.102 & 0.261 & 0.069 & 0.203 \\
+(Val. - Train.) & & & & & & \\
+Accuracy & 0.367 & 0.279 & 0.447 & 0.476 & 0.893 & 0.879 \\
+AUC / ROC & 0.785 & 0.683 & 0.838 & 0.848 & 0.994 & 0.992 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Architecture Comparison}
+SimpleCNN demonstrated the lowest performance across all metrics. The non-augmented variant stopped training early after only 8 epochs and showed a larger validation-training loss difference compared to the augmented version.
+
+LargerNet achieved intermediate performance levels between SimpleCNN and ResNet. The augmented variant completed the full training cycle of 300 epochs with a smaller loss difference, while the non-augmented version stopped after 91 epochs. Both variants achieved similar accuracy and AUC/ROC scores.
+
+ResNet exhibited the highest performance among all tested architectures, with both variants completing 300 epochs of training. The augmented and non-augmented models achieved comparable accuracy and AUC/ROC values, with the augmented variant showing a smaller validation-training loss difference.
+
+Across all architectures, data augmentation consistently reduced the gap between validation and training loss, with the most substantial effect observed in SimpleCNN.
 
 \section{Results}
+
 \subsection{Results on Testset (D)}
 \subsection{Effects of Data Augmentation (D)}
 \subsection{Class Separability (D)}
@@ -154,7 +219,7 @@ Note that the Reference section does not count towards the page limit.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Declaration of Authorship
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+
 
 {\parindent 0cm
 %%%%%%%%%%%%%%%%%%%%%%%%%%German%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
