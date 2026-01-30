@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.14)  29 JAN 2026 13:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.14)  30 JAN 2026 19:07
 entering extended mode
 **./report.tex
 (report.tex
@@ -566,54 +566,44 @@ Underfull \vbox (badness 2073) has occurred while \output is active []
  [1
 
 
-{C:/Users/klugm/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2]
-No file report.bbl.
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 232--236
+{C:/Users/klugm/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3] (report
+.bbl)
+Underfull \hbox (badness 10000) in paragraph at lines 227--231
 [][]  []
  []
 
 [4] (report.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 
 Package rerunfilecheck Warning: File `report.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: D2C0D65A552773C1C9978FD3A5F6632C;2891
-(rerunfilecheck)             After:  B7068F18B7CB07C4A1DCC431DC25CAD3;2745.
+(rerunfilecheck)             Before: B075A742BD441D53DF05338B7D0A0696;2662
+(rerunfilecheck)             After:  A74CB5B4C7A264776A64E75C718225C5;2793.
  ) 
 Here is how much of TeX's memory you used:
- 12791 strings out of 478864
- 188225 string characters out of 2848660
- 550350 words of memory out of 3000000
- 30382 multiletter control sequences out of 15000+600000
- 433197 words of font info for 127 fonts, out of 8000000 for 9000
+ 12820 strings out of 478864
+ 188722 string characters out of 2848660
+ 549239 words of memory out of 3000000
+ 30398 multiletter control sequences out of 15000+600000
+ 436481 words of font info for 132 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,10n,80p,1005b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{subsection.3.2} has been referenced but does not 
-exist, replaced by a fixed one
-
- <C:\Users\klugm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt10
-00.pk>{C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc
-}<C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmr10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmr7.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/klugm/AppData/Local/Program
-s/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/klugm/AppData/Local/Program
-s/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
-Output written on report.pdf (4 pages, 108622 bytes).
+ 72i,10n,80p,1005b,344s stack positions out of 5000i,500n,10000p,200000b,80000s
+{C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <C
+:\Users\klugm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.
+pk><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/klugm/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/klugm/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/klugm/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (4 pages, 128488 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 32 named destinations out of 1000 (max. 500000)
- 34473 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 214 PDF objects out of 1000 (max. 8388607)
+ 35 named destinations out of 1000 (max. 500000)
+ 38553 words of extra memory for PDF output out of 42996 (max. 10000000)
 

@@ -1,0 +1,36 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Fawcett(2006)]{fawcett2006}
+T.~Fawcett.
+\newblock An introduction to roc analysis.
+\newblock \emph{Pattern Recognition Letters}, 27\penalty0 (8):\penalty0
+  861--874, 2006.
+\newblock ISSN 0167-8655.
+\newblock \doi{https://doi.org/10.1016/j.patrec.2005.10.010}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S016786550500303X}.
+\newblock ROC Analysis in Pattern Recognition.
+
+\bibitem[Hand and Till(2001)]{hand2001}
+D.~J. Hand and R.~J. Till.
+\newblock A simple generalisation of the area under the roc curve for multiple
+  class classification problems.
+\newblock \emph{Machine learning}, 45\penalty0 (2):\penalty0 171--186, 2001.
+
+\bibitem[Kingma and Ba(2017)]{kingma2017}
+D.~P. Kingma and J.~Ba.
+\newblock Adam: A method for stochastic optimization, 2017.
+\newblock URL \url{https://arxiv.org/abs/1412.6980}.
+
+\bibitem[Prechelt(2002)]{prechelt2002}
+L.~Prechelt.
+\newblock Early stopping-but when?
+\newblock In \emph{Neural Networks: Tricks of the trade}, pages 55--69.
+  Springer, 2002.
+
+\end{thebibliography}
