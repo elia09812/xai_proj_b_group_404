@@ -53,10 +53,10 @@
   Elia \\
   Otto-Friedrich University of Bamberg\\
   96049 Bamberg, Germany\\
-  \texttt{max.mustermann@stud.uni-bamberg.de} \\[0.5cm]
+  \texttt{elia-maximilian.stamm@stud.uni-bamberg.de} \\[0.5cm]
   Project: xAI-Proj-B \\
-  Degree: B.Sc. AI/ \\
-  Matriculation \#: 12345678
+  Degree: B.Sc. AI \\
+  Matriculation \#: 2104632
   % examples of more authors  
   \And
   Dominic \\
@@ -112,19 +112,60 @@
 
 
 \section{Introduction (E)}
+\subsection{Project Format}
+The project was designed as a hands-on exploration of deep learning for image classification. We trained convolutional neural networks on a subset of ImageNet containing approximately 13,000 labeled images, focusing on ten everyday object classes: \textit{coffee\_mug, notebook, remote\_control, soup\_bowl, teapot, wooden\_spoon, computer\_keyboard, mouse, binder,} and \textit{toilet\_tissue}. Throughout the project, we systematically experimented with different network architectures, training strategies, and optimization techniques. Model performance was assessed using standard evaluation metrics, and we further examined the effect of data augmentation methods on classification accuracy. The project concluded with the presentation and analysis of experimental results, emphasizing both performance and methodological insights. 
 
+Beyond standard benchmarking, the project included an additional evaluation step aimed at testing model robustness. After training, all architectures were evaluated on a separately collected test set containing images of the same classes but captured in outdoor environments. Each student contributed at least 300 annotated images, and the final test set combined the data from all participants. This setup allowed us to assess how well the trained models generalized to a shifted data distribution, rather than merely measuring performance on data similar to the training set.
 
-Please read the instructions below carefully and follow them faithfully. Those instructions and style file is based on \verb+neurips_2022.tex+ (LPPL v1.3c) and was adapted for the purposes at the Chair of Explainable Machine Learning at the University of Bamberg.
+\subsection{Motivation and Goals}
+Our primary goal was to compare different convolutional neural network architectures in the context of an image classification task with limited training data. This constraint made overfitting a central challenge and motivated us to explore architectural and regularization choices that could improve generalization. By progressing from simpler models to more advanced architectures, we aimed to understand how design decisions affect performance and robustness, rather than solely optimizing for accuracy. 
+
+In addition, we placed strong emphasis on systematic model evaluation. Precise evaluation metrics were essential for comparing architectures fairly and for assessing the impact of different data augmentation strategies. By evaluating models not only on standard validation data but also on a separately collected test set, we sought to better understand how training choices influenced generalization to unseen and more challenging data distributions.
 
 \section{Methodology}
+\subsection{Data Augmentation (D)}
+\subsection{SimpleNet Architecture (E)}
+The SimpleNet architecture was our initial CNN model, designed to be small and straightforward. Its simplicity allowed us to quickly implement and test basic convolutional and pooling operations, serving as a clear proof-of-concept for our image classification pipeline.
 
-\subsection{Data Augmentation (E)}
-\subsection{Architectures (E)}
-\begin{itemize}
-\item SimpleNet
-\item LargerNet
-\item ResNet
-\end{itemize}
+\begin{figure}[hbt!]
+    \includegraphics[width=\linewidth]{./figures/LargerNet.png}
+    \caption{The SimpleNet architecture}
+\end{figure}
+
+The \textit{SimpleNet} architecture consists of three repeated blocks of convolution, ReLU activation, and pooling layers, followed by a fully connected layer with ReLU activation, and a final fully connected layer for classification. This straightforward design allowed the network to extract hierarchical features from the input images while keeping the number of parameters low.
+
+We used the Rectified Linear Unit (ReLU) as an activation function throughout SimpleNet due to its simplicity and effectiveness. ReLU introduces nonlinearity by applying a non-saturating activation, which enables the network to learn complex decision functions without altering the receptive fields of convolutional layers. \cite{traore2018deep} show that ReLU significantly accelerates training compared to saturated nonlinear functions such as sigmoid or tanh, while maintaining comparable generalization performance. These properties made ReLU a suitable choice for our architectures.
+
+Despite its modest size, SimpleNet provided valuable insights into the impact of architectural choices, such as layer depth, activation functions, and regularization techniques. Retaining it in the project highlights a baseline performance and allows for direct comparison with more advanced architectures, demonstrating how network complexity and design improvements influence accuracy and generalization.
+
+\subsection{LargerNet Architecture (E)}
+In the architecture we refer to as \textit{LargerNet}, our goal was to explicitly address overfitting. We did this both by increasing the depth of the network and by incorporating several design choices motivated by our literature review and prior experimentation.
+
+\begin{figure}[hbt!]
+    \includegraphics[width=\linewidth]{./figures/LargerNet.png}
+    \caption{The LargerNet architecture}
+\end{figure}
+
+We added batch normalization to our CNN as part of an iterative effort to make training more stable and to improve generalization. Prior work by \cite{ogundokun2022improved} shows that batch normalization accelerates convergence, reduces internal covariate shift, and acts as an effective regularizer in convolutional networks. These properties allow higher learning rates and help mitigate overfitting, especially in deeper architectures. Based on these results, we incorporated batch normalization layers into our model to promote more robust feature learning and to reduce sensitivity to variations in the input data distribution, while maintaining efficient and stable training throughout our experiments.
+
+\cite{ogundokun2022improved} also show that combining dropout with batch normalization improves generalization by preventing co-adaptation of neurons during training. Motivated by these findings, we applied dropout in our network to encourage more robust feature learning.
+
+The \textit{LargerNet} architecture further differs from our earlier models by increasing overall capacity and structural depth. An Adaptive Average Pooling layer is placed between the convolutional and fully connected parts of the network to produce a fixed-size representation, allowing the model to better aggregate spatial information while remaining flexible to input variations.
+
+\subsection{ResNet18 Architecture (E)}
+We selected ResNet18 for its combination of practicality and strong performance. Pretrained weights are readily available in PyTorch, which allowed us to integrate the model efficiently into our setup. Its original training on ImageNet also aligned well with our task, providing feature representations that could be transferred effectively. 
+
+Moreover, ResNet18 is widely cited in the literature and is known for its residual architecture, which enables deep networks to learn complex features while avoiding vanishing gradient issues \citep{liang2020image}. These advantages made it a natural choice for our 10-class classification problem, offering a balance of reliability, efficiency, and strong baseline performance. 
+
+To adapt ResNet18 to our 10-class task, we replaced the original final fully connected layer, which outputs 1,000 classes, with a new layer matching our target classes. During training, we froze the weights of all other layers in the network, effectively using the pretrained backbone as a fixed feature extractor. Only the newly added classification layer was trained initially, allowing the network to quickly learn task-specific mappings without overfitting. After this stage, we optionally fine-tuned the entire model by unfreezing some or all layers, enabling the pretrained features to adjust slightly to our data while still leveraging the robustness of the original ResNet18 representations.
+
+Residual blocks in ResNet18 allow input signals to bypass one or more layers through shortcut connections, enabling information to flow directly across the network. This design helps mitigate the vanishing gradient problem and allows very deep networks to be trained effectively. Even though our network was not extremely deep, the residual connections still supported stable training and improved feature propagation, making it easier for the model to learn complex representations without degradation as layers increased.
+
+
+
+
+
+
 \subsection{Training (M)}
 Model training was conducted using the Adam optimizer \citep{kingma2017} with default settings (initial learning rate of 0.0001). To ensure convergence and prevent overfitting, we employed a learning rate scheduler and an early stopping mechanism. 
 
@@ -311,16 +352,6 @@ Bamberg, \today
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\appendix
-
-
-\section{Appendix}
-
-
-Optionally include extra information (complete proofs, additional experiments and plots) in the appendix.
-This section will often be part of the supplemental material.
 
 
 \end{document}
