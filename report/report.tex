@@ -31,6 +31,8 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
+\usepackage{graphicx}
+
 
 \usepackage[round]{natbib}
 %%%%
@@ -195,8 +197,82 @@ AUC / ROC & 0.785 & 0.683 & 0.838 & 0.848 & 0.994 & 0.992 \\
 \section{Results}
 
 \subsection{Results on Testset (D)}
+All results in this section are based solely on the self-collected outdoor test dataset. This dataset was not used during training or validation and differs from the ImageNet-based training data in terms of environment and image conditions.
+
+The self-collected test dataset consists of 949 outdoor images covering the same ten object classes as the training data. All images were captured by four independent student groups in real-world outdoor environments. The dataset includes variations in background, lighting, and viewpoints and was used exclusively to evaluate model performance under domain shift.
+
+The evaluation aims to analyze how well the trained models generalize to unseen outdoor data. Performance is reported using overall accuracy, confusion matrices, per-class accuracy, and ROC-AUC scores.
+
+\subsection{Results on Testset (D)}
+Performance on the self-collected outdoor test dataset is compared across all evaluated models. 
+
+Table~\ref{tab:test_results} reports the overall classification accuracy and ROC-AUC scores for SimpleNet, LargerNet and ResNet18. Each model is evaluated with and without data augmentation.
+
+Across all evaluation settings, ResNet18 achieves the highest performance on the outdoor test set in terms of both accuracy and ROC-AUC. The two custom architectures, SimpleNet and LargerNet show lower performance on the same data. LargerNet consistently outperforms SimpleNet, while both remain clearly below the performance level of ResNet18. 
+
+The relative performance ordering of the evaluated architectures remains consistent across both evaluation metrics.
+
+\begin{table}[h]
+\centering
+\caption{Test results on the self-collected outdoor dataset for different neural network architectures with and without data augmentation.}
+\label{tab:test_results}
+
+\setlength{\tabcolsep}{8pt}           % horizontal padding 
+\renewcommand{\arraystretch}{1.15}    % vertical padding
+
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Metric} & \multicolumn{2}{c}{\textbf{SimpleNet}} & \multicolumn{2}{c}{\textbf{LargerNet}} & \multicolumn{2}{c}{\textbf{ResNet18}} \\
+\cline{2-7}
+\textbf{Augmentation} & Yes & No & Yes & No & Yes & No \\
+\hline
+Accuracy      & 0.125 & 0.154 & 0.162 & 0.203 & 0.466 & 0.685 \\[2pt]
+ROC-AUC (OvR) & 0.566 & 0.608 & 0.600 & 0.629 & 0.886 & 0.955 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+
 \subsection{Effects of Data Augmentation (D)}
+The effect of data augmentation on test performance is evaluated by comparing augmented and non-augmented variants of all models. The corresponding accuracy and ROC-AUC values are reported in Table~\ref{tab:test_results}.
+
+For all three architectures, data augmentation results in lower classification accuracy compared to the non-augmented variants. A similar decrease can be observed for the ROC-AUC scores. The largest absolute performance drop occurs for ResNet18, while SimpleNet and LargerNet show smaller differences between the two configurations.
+
 \subsection{Class Separability (D)}
+
+Class separability is analyzed using the best-performing model, ResNet18 without data augmentation.
+
+Figure~\ref{fig:per_class_accuracy_resnet18} shows the per-class classification accuracy on the outdoor test dataset.
+The figure indicates noticeable differences in classification performance across object categories.
+While classes such as computer-keyboard and mouse achieve comparatively high accuracy, other classes such as binder and notebook show lower accuracy values, suggesting that these classes are more difficult to distinguish in outdoor settings.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/resnet18_per_class_accuracy.png}
+\caption{Per-class classification accuracy for ResNet18 without data augmentation on the outdoor test dataset.}
+\label{fig:per_class_accuracy_resnet18}
+\end{figure}
+
+
+To analyze the underlying error patterns in more detail, Figure~\ref{fig:confusion_matrix_resnet18} presents the corresponding confusion matrix.
+The matrix shows that most predictions are located on the diagonal, indicating correct classification for a large portion of the test samples.
+However, several off-diagonal entries reveal recurring confusions between specific class pairs.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/resnet18_confusion_matrix.png}
+\caption{Confusion matrix for ResNet18 without data augmentation evaluated on the test dataset.}
+\label{fig:confusion_matrix_resnet18}
+\end{figure}
+
+
+In particular, images of teapots are frequently misclassified as coffee mugs, with 22 such cases visible in the confusion matrix.
+Similarly, notebooks are misclassified as binders in 12 instances, while binders are predicted as notebooks in 13 instances.
+Another prominent confusion occurs between computer keyboards and remote controls, where 17 keyboard images are classified as remote controls.
+These confusion patterns correspond to the lower per-class accuracy values observed for the affected classes in Figure~\ref{fig:per_class_accuracy_resnet18}.
 
 \section{Discussion}
 \subsection{Discoveries (M)}
