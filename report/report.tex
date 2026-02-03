@@ -177,7 +177,7 @@ The training procedure followed an iterative process over multiple epochs: each 
 \subsection{Evaluation Metrics (M)}
 Model performance was assessed using multiple evaluation metrics to provide a comprehensive analysis of classification quality.
 \subsubsection{Accuracy}
-Accuracy was calculated as the percentage of correct predictions relative to the total number of predictions. For binary or multi-class classification, accuracy is defined as:
+Accuracy was calculated as the percentage of correct predictions relative to the total number of predictions. For multi-class classification, accuracy is defined as:
 
 \begin{equation}
 \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
@@ -337,16 +337,6 @@ Second, the data augmentation strategy employed generic transformations without 
 Third, the evaluation was limited to accuracy, per-class accuracy, and ROC-AUC metrics. These metrics quantify classification performance but do not indicate which visual features the models use or why specific confusions occur. Interpretability techniques such as Grad-CAM (Gradient-weighted Class Activation Mapping, \cite{selvaraju2016}) were not applied. Such methods could identify which image regions contribute to predictions \citep{selvaraju2016} and explain the failure modes observed on the outdoor test set.
 
 Finally, the outdoor test set contained images collected by students in the timespan between October and December. This may introduce biases in photographing style, object selection, and environmental conditions. A larger and more diverse test set would provide additional insight into model generalization.
-
-\subsection{Future Work (M)}
-Based on the findings and limitations, several directions for future work can be identified. First, domain-specific data augmentation techniques could be developed to better match outdoor environment characteristics. This could include augmentation with realistic outdoor backgrounds, varied lighting conditions (e.g., direct sunlight, shadows), and perspective transformations that reflect typical camera angles for outdoor photography. Another approach would be the implementation of neural augmentation, which adapts the augmentation in respect to the improvement of the classifier using a neuronal network \citep{perez2017}.
-
-Second, interpretability methods such as Grad-CAM could be applied to visualize which image regions contribute to classification decisions. This would indicate whether the model uses discriminative features (e.g., object shape, texture) or background information \citep{selvaraju2016}. Such analysis could inform refinements to model architectures and training strategies.
-
-Third, alternative transfer learning strategies could be explored. Fine-tuning deeper layers of ResNet18 or applying other pretrained architectures such as EfficientNet or Vision Transformers may improve performance. Domain adaptation techniques that reduce the distribution shift between source (ImageNet) and target (outdoor) domains could also be investigated.
-
-Finally, the outdoor test set could be expanded to include more environments, lighting conditions, and object instances. This would enable more detailed analysis of how environmental factors affect classification performance and inform the design of more robust models.
-
 
 \section{Conclusion (E)}
 

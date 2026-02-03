@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.14)  3 FEB 2026 11:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.14)  3 FEB 2026 11:15
 entering extended mode
 **./report.tex
 (report.tex
@@ -613,47 +613,56 @@ Package pdftex.def Info: figures/resnet18_confusion_matrix.png  used on input l
 ine 307.
 (pdftex.def)             Requested size: 357.73405pt x 286.18567pt.
  [6 <./figures/resnet18_per_class_accuracy.png>]
-[7 <./figures/resnet18_confusion_matrix.png>] [8] [9] (report.bbl)
-Underfull \hbox (badness 10000) in paragraph at lines 373--376
+[7 <./figures/resnet18_confusion_matrix.png>] [8] (report.bbl)
+Underfull \hbox (badness 10000) in paragraph at lines 363--366
 [][]  []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--382
+Underfull \hbox (badness 10000) in paragraph at lines 369--372
 [][]  []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--389
+Underfull \hbox (badness 10000) in paragraph at lines 375--379
 [][]  []
  []
 
-[10] (report.aux)
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 74BAE08767609E4933B1678805115699;3803.
+[9] (report.aux)
+
+Package rerunfilecheck Warning: File `report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report.out':
+(rerunfilecheck)             Before: 74BAE08767609E4933B1678805115699;3803
+(rerunfilecheck)             After:  A398A8E7639300EF293AB2DBCB71C949;3658.
  ) 
 Here is how much of TeX's memory you used:
- 13244 strings out of 478864
- 195489 string characters out of 2848660
- 558900 words of memory out of 3000000
+ 13243 strings out of 478864
+ 195482 string characters out of 2848660
+ 557948 words of memory out of 3000000
  30707 multiletter control sequences out of 15000+600000
  440047 words of font info for 180 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,10n,80p,1005b,364s stack positions out of 5000i,500n,10000p,200000b,80000s
-{C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <C
-:\Users\klugm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.
-pk><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmmi10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmr10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/klugm/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/klugm/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/klugm/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (10 pages, 455794 bytes).
+pdfTeX warning (dest): name{subsection.5.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+{C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <C:\
+Users\klugm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk
+><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/klugm/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/klugm/AppData/Local/Program
+s/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/klugm/AppData/Local/Program
+s/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/klugm/AppData/Local/Program
+s/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (9 pages, 452660 bytes).
 PDF statistics:
- 323 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
+ 315 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
  36568 words of extra memory for PDF output out of 42996 (max. 10000000)
 
