@@ -198,11 +198,11 @@ Receiver Operating Characteristic (ROC) curve analysis and the corresponding Are
 
 The overall model performance was quantified using the weighted-averaged AUC, which computes the weighted mean of individual class AUC values, thereby treating all classes regarding their sample size. This approach provides a balanced assessment of model performance across all classes.
 
-\section{Experiments (M)}
-\subsection{Training Setup}
-%TODO add hard facts: kaggle, gpu/cpu, batch size, framework (pytorch mit version), python version, trainingszeit, random seeds, gewichtsinitalisierung
+\section{Experiments}
+\subsection{Training Setup (E)}
+All experiments were conducted using the free-tier Kaggle environment, which provides up to 30 hours of GPU time per week on an NVIDIA P100. During initial experiments, we used a batch size of 64, which led to an imbalance between CPU and GPU utilization, characterized by prolonged periods of high CPU load and relatively low GPU usage. This indicated that data loading and preprocessing had become a bottleneck in the training pipeline. By reducing the batch size to 4, we achieved more consistent GPU utilization and significantly lower CPU overhead, resulting in a more efficient training process. Accordingly, we configured the PyTorch \verb|DataLoader| with \verb|batch_size=4|, \verb|num_workers=4|, and a fixed random seed of 42 to ensure reproducibility and stable performance.
 
-\subsection{Architecture Comparison}
+\subsection{Architecture Comparison (M)}
 Table~\ref{tab:training_results} summarizes the training results for each of the implemented neural network architectures.
 
 SimpleCNN demonstrated the lowest performance across all metrics. The non-augmented variant stopped training early after only 8 epochs and showed a larger validation-training loss difference compared to the augmented version.
