@@ -1,4 +1,4 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -27,10 +27,34 @@ D.~P. Kingma and J.~Ba.
 \newblock Adam: A method for stochastic optimization, 2017.
 \newblock URL \url{https://arxiv.org/abs/1412.6980}.
 
+\bibitem[Liang(2020)]{liang2020image}
+J.~Liang.
+\newblock Image classification based on resnet.
+\newblock \emph{Journal of Physics: Conference Series}, 1634:\penalty0 012110,
+  2020.
+\newblock \doi{10.1088/1742-6596/1634/1/012110}.
+\newblock URL \url{https://doi.org/10.1088/1742-6596/1634/1/012110}.
+
+\bibitem[Ogundokun et~al.(2022)Ogundokun, Maskeliunas, Misra, and
+  Damaševičius]{ogundokun2022improved}
+R.~O. Ogundokun, R.~Maskeliunas, S.~Misra, and R.~Damaševičius.
+\newblock \emph{Improved CNN Based on Batch Normalization and Adam Optimizer},
+  pages 593--604.
+\newblock Springer International Publishing, 2022.
+\newblock \doi{10.1007/978-3-031-10548-7_43}.
+\newblock URL \url{https://doi.org/10.1007/978-3-031-10548-7_43}.
+
 \bibitem[Prechelt(2002)]{prechelt2002}
 L.~Prechelt.
 \newblock Early stopping-but when?
 \newblock In \emph{Neural Networks: Tricks of the trade}, pages 55--69.
   Springer, 2002.
+
+\bibitem[Traore et~al.(2018)Traore, Kamsu-Foguem, and Tangara]{traore2018deep}
+B.~B. Traore, B.~Kamsu-Foguem, and F.~Tangara.
+\newblock Deep convolution neural network for image recognition.
+\newblock \emph{Ecological Informatics}, 48:\penalty0 257--268, 2018.
+\newblock \doi{10.1016/j.ecoinf.2018.10.002}.
+\newblock URL \url{https://doi.org/10.1016/j.ecoinf.2018.10.002}.
 
 \end{thebibliography}

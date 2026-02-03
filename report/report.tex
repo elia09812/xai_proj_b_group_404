@@ -317,7 +317,36 @@ These confusion patterns correspond to the lower per-class accuracy values obser
 
 \section{Discussion}
 \subsection{Discoveries (M)}
+The experimental results show distinct performance differences between the evaluated architectures and provide insight into the effects of domain shift on model generalization.
+
+ResNet18 outperformed both custom architectures across all evaluation settings. On the validation data, ResNet18 achieved an accuracy of 0.893 (augmented) and 0.879 (non-augmented), compared to LargerNet's 0.447--0.476 and SimpleNet's 0.279--0.367. This performance difference increased on the outdoor test set, where ResNet18 achieved accuracies of 0.466 and 0.685 while both custom architectures remained below 0.203. The ROC-AUC analysis shows a similar pattern, with ResNet18 achieving 0.955 (non-augmented) on the test set compared to 0.629 for LargerNet and 0.608 for SimpleNet. These results indicate that pretrained features from ImageNet transfer to the outdoor domain more effectively than features learned from scratch on the limited training data.
+
+The performance of ResNet18 can be attributed to several architectural factors. The residual connections enable gradient flow during backpropagation, which facilitates the learning of deeper feature hierarchies \cite{liang2020}. The pretrained weights provide initialization with features learned from a larger dataset. The model's higher parameter count allows for more complex decision boundaries. In contrast, SimpleNet and LargerNet were trained from scratch on approximately 13,000 images, which limited their ability to learn generalizable features.
+
+Data augmentation reduced performance on the outdoor test set across all architectures while maintaining comparable performance during training. For ResNet18, augmentation reduced test accuracy from 0.685 to 0.466, a decrease of 0.219. Similar decreases were observed for SimpleNet and LargerNet. This pattern differs from the common observation that augmentation improves generalization.
+
+This result may be explained by a mismatch between the augmentation strategies and the characteristics of the test domain. The augmentation techniques applied during training included random rotations, color jittering, and cropping. These transformations may not reflect the distribution shift between indoor ImageNet images and outdoor photographs. Outdoor images differ from ImageNet images in lighting conditions, background complexity, and perspective variations. The applied augmentations may have reduced the model's ability to learn features relevant to the outdoor test distribution.
+
+The per-class analysis shows variation in classification performance across object categories in outdoor settings. Wooden Spoon and Toilet Tissue achieved higher accuracy than other classes. Classes such as Teapot, Mouse, Soup Bowl, and Computer Keyboard showed lower accuracy and higher confusion rates. The confusion matrix shows that teapots were misclassified as coffee mugs in 22 instances, notebooks as binders in 13 instances, and binders as notebooks in 12 instances. Computer keyboards were misclassified as remote controls in 17 instances. These confusions occur between objects with similar shapes, which suggests that shape-based features may be insufficient when objects share geometric properties or when outdoor conditions alter visual appearance.
+
 \subsection{Limitations (M)}
+The study has several limitations. First, the custom architectures were trained from scratch on approximately 13,000 images. This limited the models' ability to learn generalizable features, particularly for SimpleNet, which stopped training after 8 epochs in the non-augmented setting. LargerNet employed batch normalization and dropout, but performance remained below ResNet18, which was pretrained on the full ImageNet dataset.
+
+Second, the data augmentation strategy employed generic transformations without consideration of the target domain characteristics. As discussed above, this may have caused a mismatch between augmented training data and the test distribution. Domain-specific augmentation techniques that reflect outdoor environment variations, such as natural lighting conditions, background variations, and perspective changes, were not applied.
+
+Third, the evaluation was limited to accuracy, per-class accuracy, and ROC-AUC metrics. These metrics quantify classification performance but do not indicate which visual features the models use or why specific confusions occur. Interpretability techniques such as Grad-CAM (Gradient-weighted Class Activation Mapping) were not applied. Such methods could identify which image regions contribute to predictions and explain the failure modes observed on the outdoor test set.
+
+Finally, the outdoor test set contained images collected by students in the timespan between October and December. This may introduce biases in photographing style, object selection, and environmental conditions. A larger and more diverse test set would provide additional insight into model generalization.
+
+\subsection{Future Work (M)}
+Based on the findings and limitations, several directions for future work can be identified. First, domain-specific data augmentation techniques could be developed to better match outdoor environment characteristics. This could include augmentation with realistic outdoor backgrounds, varied lighting conditions (e.g., direct sunlight, shadows), and perspective transformations that reflect typical camera angles for outdoor photography.
+
+Second, interpretability methods such as Grad-CAM could be applied to visualize which image regions contribute to classification decisions. This would indicate whether the model uses discriminative features (e.g., object shape, texture) or background information. Such analysis could inform refinements to model architectures and training strategies.
+
+Third, alternative transfer learning strategies could be explored. Fine-tuning deeper layers of ResNet18 or applying other pretrained architectures such as EfficientNet or Vision Transformers may improve performance. Domain adaptation techniques that reduce the distribution shift between source (ImageNet) and target (outdoor) domains could also be investigated.
+
+Finally, the outdoor test set could be expanded to include more environments, lighting conditions, and object instances. This would enable more detailed analysis of how environmental factors affect classification performance and inform the design of more robust models.
+
 
 \section{Conclusion (E)}
 
