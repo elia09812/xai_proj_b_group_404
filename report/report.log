@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.14)  3 FEB 2026 10:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.14)  3 FEB 2026 10:56
 entering extended mode
 **./report.tex
 (report.tex
@@ -590,7 +590,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 {C:/Users/klugm/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-<./figures/LargerNet.png, id=108, 1050.92625pt x 254.1495pt>
+<./figures/LargerNet.png, id=112, 1050.92625pt x 254.1495pt>
 File: ./figures/LargerNet.png Graphic file (type png)
 <use ./figures/LargerNet.png>
 Package pdftex.def Info: ./figures/LargerNet.png  used on input line 131.
@@ -600,13 +600,13 @@ File: ./figures/LargerNet.png Graphic file (type png)
 Package pdftex.def Info: ./figures/LargerNet.png  used on input line 145.
 (pdftex.def)             Requested size: 397.48499pt x 96.12408pt.
  [2 <./figures/LargerNet.png>] [3] [4] [5]
-<figures/resnet18_per_class_accuracy.png, id=166, 722.7pt x 361.35pt>
+<figures/resnet18_per_class_accuracy.png, id=170, 722.7pt x 361.35pt>
 File: figures/resnet18_per_class_accuracy.png Graphic file (type png)
 <use figures/resnet18_per_class_accuracy.png>
 Package pdftex.def Info: figures/resnet18_per_class_accuracy.png  used on input
  line 295.
 (pdftex.def)             Requested size: 357.73405pt x 178.86604pt.
-<figures/resnet18_confusion_matrix.png, id=168, 722.7pt x 578.16pt>
+<figures/resnet18_confusion_matrix.png, id=172, 722.7pt x 578.16pt>
 File: figures/resnet18_confusion_matrix.png Graphic file (type png)
 <use figures/resnet18_confusion_matrix.png>
 Package pdftex.def Info: figures/resnet18_confusion_matrix.png  used on input l
@@ -618,7 +618,17 @@ Package natbib Warning: Citation `liang2020' on page 7 undefined on input line
 324.
 
 [7 <./figures/resnet18_confusion_matrix.png>] [8] [9] (report.bbl)
-Underfull \hbox (badness 10000) in paragraph at lines 373--377
+Underfull \hbox (badness 10000) in paragraph at lines 373--376
+[][]  []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--382
+[][]  []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 385--389
 [][]  []
  []
 
@@ -626,21 +636,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 373--377
 Package natbib Warning: There were undefined citations.
 
 [10] (report.aux)
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: A398A8E7639300EF293AB2DBCB71C949;3658
-(rerunfilecheck)             After:  74BAE08767609E4933B1678805115699;3803.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: 74BAE08767609E4933B1678805115699;3803.
  ) 
 Here is how much of TeX's memory you used:
- 13230 strings out of 478864
- 195282 string characters out of 2848660
- 558156 words of memory out of 3000000
- 30700 multiletter control sequences out of 15000+600000
- 439850 words of font info for 177 fonts, out of 8000000 for 9000
+ 13245 strings out of 478864
+ 195498 string characters out of 2848660
+ 558915 words of memory out of 3000000
+ 30707 multiletter control sequences out of 15000+600000
+ 440110 words of font info for 181 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,10n,80p,1005b,364s stack positions out of 5000i,500n,10000p,200000b,80000s
 {C:/Users/klugm/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <C
@@ -654,9 +658,9 @@ eX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/klugm/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/klugm/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/klugm/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (10 pages, 451373 bytes).
+Output written on report.pdf (10 pages, 455977 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
- 36560 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 321 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 36568 words of extra memory for PDF output out of 42996 (max. 10000000)
 

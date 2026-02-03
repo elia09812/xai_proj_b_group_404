@@ -332,16 +332,16 @@ The per-class analysis shows variation in classification performance across obje
 \subsection{Limitations (M)}
 The study has several limitations. First, the custom architectures were trained from scratch on approximately 13,000 images. This limited the models' ability to learn generalizable features, particularly for SimpleNet, which stopped training after 8 epochs in the non-augmented setting. LargerNet employed batch normalization and dropout, but performance remained below ResNet18, which was pretrained on the full ImageNet dataset.
 
-Second, the data augmentation strategy employed generic transformations without consideration of the target domain characteristics. As discussed above, this may have caused a mismatch between augmented training data and the test distribution. Domain-specific augmentation techniques that reflect outdoor environment variations, such as natural lighting conditions, background variations, and perspective changes, were not applied.
+Second, the data augmentation strategy employed generic transformations without consideration of the target domain characteristics. As discussed above, this may have caused a mismatch between augmented training data and the test distribution. Following \citep{perez2017} augmentation typically increases the generalizability. However, this is not applicable in our case, as we have a domain shift between indoor and outdoor contexts. Domain-specific augmentation techniques that reflect outdoor environment variations, such as natural lighting conditions, background variations, and perspective changes, were not applied.
 
-Third, the evaluation was limited to accuracy, per-class accuracy, and ROC-AUC metrics. These metrics quantify classification performance but do not indicate which visual features the models use or why specific confusions occur. Interpretability techniques such as Grad-CAM (Gradient-weighted Class Activation Mapping) were not applied. Such methods could identify which image regions contribute to predictions and explain the failure modes observed on the outdoor test set.
+Third, the evaluation was limited to accuracy, per-class accuracy, and ROC-AUC metrics. These metrics quantify classification performance but do not indicate which visual features the models use or why specific confusions occur. Interpretability techniques such as Grad-CAM (Gradient-weighted Class Activation Mapping, \cite{selvaraju2016}) were not applied. Such methods could identify which image regions contribute to predictions \citep{selvaraju2016} and explain the failure modes observed on the outdoor test set.
 
 Finally, the outdoor test set contained images collected by students in the timespan between October and December. This may introduce biases in photographing style, object selection, and environmental conditions. A larger and more diverse test set would provide additional insight into model generalization.
 
 \subsection{Future Work (M)}
-Based on the findings and limitations, several directions for future work can be identified. First, domain-specific data augmentation techniques could be developed to better match outdoor environment characteristics. This could include augmentation with realistic outdoor backgrounds, varied lighting conditions (e.g., direct sunlight, shadows), and perspective transformations that reflect typical camera angles for outdoor photography.
+Based on the findings and limitations, several directions for future work can be identified. First, domain-specific data augmentation techniques could be developed to better match outdoor environment characteristics. This could include augmentation with realistic outdoor backgrounds, varied lighting conditions (e.g., direct sunlight, shadows), and perspective transformations that reflect typical camera angles for outdoor photography. Another approach would be the implementation of neural augmentation, which adapts the augmentation in respect to the improvement of the classifier using a neuronal network \citep{perez2017}.
 
-Second, interpretability methods such as Grad-CAM could be applied to visualize which image regions contribute to classification decisions. This would indicate whether the model uses discriminative features (e.g., object shape, texture) or background information. Such analysis could inform refinements to model architectures and training strategies.
+Second, interpretability methods such as Grad-CAM could be applied to visualize which image regions contribute to classification decisions. This would indicate whether the model uses discriminative features (e.g., object shape, texture) or background information \citep{selvaraju2016}. Such analysis could inform refinements to model architectures and training strategies.
 
 Third, alternative transfer learning strategies could be explored. Fine-tuning deeper layers of ResNet18 or applying other pretrained architectures such as EfficientNet or Vision Transformers may improve performance. Domain adaptation techniques that reduce the distribution shift between source (ImageNet) and target (outdoor) domains could also be investigated.
 
@@ -368,6 +368,18 @@ Finally, the outdoor test set could be expanded to include more environments, li
 Ich erkläre hiermit gemäß § 9 Abs. 12 APO, dass ich die vorstehende Seminararbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe. Des Weiteren erkläre ich, dass die digitale Fassung der gedruckten Ausfertigung der Seminararbeit ausnahmslos in Inhalt und Wortlaut entspricht und zur Kenntnis genommen wurde, dass diese digitale Fassung einer durch Software unterstützten, anonymisierten Prüfung auf Plagiate unterzogen werden kann.\\
 \vspace{2\baselineskip}
   
+Bamberg, \today
+
+\rule[0.5em]{14em}{0.5pt} \hspace{0.25\linewidth}\rule[0.5em]{14em}{0.5pt}
+\vspace{1em}
+\hspace{4em} (Ort, Datum) \hspace{0.51\linewidth} (Unterschrift)
+
+Bamberg, \today
+
+\rule[0.5em]{14em}{0.5pt} \hspace{0.25\linewidth}\rule[0.5em]{14em}{0.5pt}
+\vspace{1em}
+\hspace{4em} (Ort, Datum) \hspace{0.51\linewidth} (Unterschrift)
+
 Bamberg, \today
 
 \rule[0.5em]{14em}{0.5pt} \hspace{0.25\linewidth}\rule[0.5em]{14em}{0.5pt}

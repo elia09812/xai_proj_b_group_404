@@ -5,44 +5,46 @@ Reallocating 'name_of_file' (item size: 1) to 13 items.
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: abbrvnat.bst
 Database file #1: bibliography.bib
-You've used 7 entries,
+Warning--I didn't find a database entry for "liang2020"
+You've used 9 entries,
             2773 wiz_defined-function locations,
-            652 strings with 5971 characters,
-and the built_in function-call counts, 3340 in all, are:
-= -- 320
-> -- 141
-< -- 7
-+ -- 49
-- -- 42
-* -- 251
-:= -- 509
-add.period$ -- 32
-call.type$ -- 7
-change.case$ -- 34
-chr.to.int$ -- 7
-cite$ -- 14
-duplicate$ -- 158
-empty$ -- 290
-format.name$ -- 53
-if$ -- 722
+            664 strings with 6416 characters,
+and the built_in function-call counts, 4284 in all, are:
+= -- 399
+> -- 219
+< -- 8
++ -- 75
+- -- 66
+* -- 329
+:= -- 665
+add.period$ -- 39
+call.type$ -- 9
+change.case$ -- 48
+chr.to.int$ -- 9
+cite$ -- 18
+duplicate$ -- 197
+empty$ -- 351
+format.name$ -- 81
+if$ -- 913
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 7
-newline$ -- 53
-num.names$ -- 28
-pop$ -- 67
+missing$ -- 9
+newline$ -- 64
+num.names$ -- 36
+pop$ -- 92
 preamble$ -- 1
-purify$ -- 28
+purify$ -- 40
 quote$ -- 0
-skip$ -- 121
+skip$ -- 156
 stack$ -- 0
-substring$ -- 151
-swap$ -- 23
+substring$ -- 155
+swap$ -- 25
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 94
 warning$ -- 0
-while$ -- 31
+while$ -- 37
 width$ -- 0
-write$ -- 118
+write$ -- 145
+(There was 1 warning)
