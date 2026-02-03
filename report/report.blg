@@ -5,10 +5,10 @@ Reallocating 'name_of_file' (item size: 1) to 13 items.
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: abbrvnat.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "liang2020"
+Warning--I didn't find a database entry for "liang2020images"
 You've used 9 entries,
             2773 wiz_defined-function locations,
-            664 strings with 6416 characters,
+            664 strings with 6422 characters,
 and the built_in function-call counts, 4284 in all, are:
 = -- 399
 > -- 219
