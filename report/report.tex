@@ -62,10 +62,10 @@
   Dominic \\
   Otto-Friedrich University of Bamberg\\
   96049 Bamberg, Germany\\
-  \texttt{max.mustermann@stud.uni-bamberg.de} \\[0.5cm]
+  \texttt{dominic-christopher.schlegel@stud.uni-bamberg.de} \\[0.5cm]
   Project: xAI-Proj-B \\
   Degree: B.Sc. AI \\
-  Matriculation \#: 12345678
+  Matriculation \#: 1984926
   \And
   Magda \\
   Otto-Friedrich University of Bamberg\\
@@ -123,7 +123,24 @@ Our primary goal was to compare different convolutional neural network architect
 In addition, we placed strong emphasis on systematic model evaluation. Precise evaluation metrics were essential for comparing architectures fairly and for assessing the impact of different data augmentation strategies. By evaluating models not only on standard validation data but also on a separately collected test set, we sought to better understand how training choices influenced generalization to unseen and more challenging data distributions.
 
 \section{Methodology}
+
 \subsection{Data Augmentation (D)}
+To increase the diversity of the training data, we applied a limited set of commonly used image data augmentation techniques during training.
+Data augmentation is a standard approach in image classification to reduce overfitting and to improve generalization by exposing models to variations of the input data \citep{shorten_survey_2019}.
+
+The applied augmentations include basic geometric and photometric transformations.
+Geometric augmentations were used to introduce robustness to changes in object position and scale, which frequently occur in real-world images.
+In our setup, input images were first resized to $272 \times 272$ pixels and then randomly cropped to $256 \times 256$ pixels.
+The random crop was sampled using a scale range of $(0.85, 1.0)$ and an aspect ratio range of $(0.9, 1.1)$.
+In addition, horizontal flipping was applied with a probability of $0.5$, which is commonly used in object recognition tasks \citep{shorten_survey_2019}.
+
+To account for variations in illumination and color conditions, we further applied photometric augmentations in the form of brightness, contrast, and saturation adjustments.
+Such color-based transformations help models cope with changes in lighting and appearance in real-world image data \citep{shorten_survey_2019}.
+In our configuration, brightness and contrast were adjusted by up to $0.12$, while saturation was adjusted by up to $0.08$.
+
+All data augmentation techniques were applied exclusively during training.
+Validation and test images were processed without random augmentations.
+
 \subsection{SimpleNet Architecture (E)}
 The SimpleNet architecture was our initial CNN model, designed to be small and straightforward. Its simplicity allowed us to quickly implement and test basic convolutional and pooling operations, serving as a clear proof-of-concept for our image classification pipeline.
 
@@ -293,7 +310,7 @@ While classes such as computer-keyboard and mouse achieve comparatively high acc
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\linewidth]{figures/resnet18_per_class_accuracy.png}
-\caption{Per-class classification accuracy for ResNet18 without data augmentation on the outdoor test dataset.}
+\caption{Per-class classification accuracy for ResNet18 without data augmentation on the test dataset.}
 \label{fig:per_class_accuracy_resnet18}
 \end{figure}
 
