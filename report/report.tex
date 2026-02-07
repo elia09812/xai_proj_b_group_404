@@ -103,12 +103,19 @@
 \def\va{{\bm{a}}}
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch on
-  both the left- and right-hand margins. Use 10~point type, with a vertical
-  spacing (leading) of 11~points.  The word \textbf{Abstract} must be centered,
-  bold, and in point size 12. Two line spaces precede the abstract. The abstract
-  must be limited to one paragraph.
+This project investigates the impact of convolutional neural network architectures and data augmentation on image classification performance. 
+Three different models were evaluated: a simple custom CNN (SimpleNet), an extended CNN with regularization techniques (LargerNet), and a pretrained ResNet18 model. 
+All models were trained on a subset of ImageNet containing approximately 13,000 images across ten classes of everyday objects.
+
+To evaluate model generalization, performance was measured on validation data. All models were tested on a separately collected outdoor test dataset consisting of 949 images captured by student groups. 
+Model performance was assessed using accuracy, per-class accuracy, confusion matrices, and ROC-AUC scores.
+
+The results show that ResNet18 significantly outperformed both custom architectures on validation and test data. 
+While data augmentation had limited impact on validation performance, it reduced performance on the outdoor test dataset for all models.
+
+These findings suggest that pretrained feature representations are more robust under domain shift compared to models trained from scratch on limited data.
 \end{abstract}
+
 
 
 \section{Introduction (E)}
@@ -145,7 +152,7 @@ Validation and test images were processed without random augmentations.
 The SimpleNet architecture was our initial CNN model, designed to be small and straightforward. Its simplicity allowed us to quickly implement and test basic convolutional and pooling operations, serving as a clear proof-of-concept for our image classification pipeline.
 
 \begin{figure}[hbt!]
-    \includegraphics[width=\linewidth]{./figures/LargerNet.png}
+    \includegraphics[width=\linewidth]{./figures/SimpleNet.png}
     \caption{The SimpleNet architecture}
 \end{figure}
 
@@ -254,7 +261,6 @@ AUC / ROC & 0.785 & 0.683 & 0.838 & 0.848 & 0.994 & 0.992 \\
 
 \section{Results}
 
-\subsection{Results on Testset (D)}
 All results in this section are based solely on the self-collected outdoor test dataset. This dataset was not used during training or validation and differs from the ImageNet-based training data in terms of environment and image conditions.
 
 The self-collected test dataset consists of 949 outdoor images covering the same ten object classes as the training data. All images were captured by four independent student groups in real-world outdoor environments. The dataset includes variations in background, lighting, and viewpoints and was used exclusively to evaluate model performance under domain shift.
@@ -342,7 +348,7 @@ The performance of ResNet18 can be attributed to several architectural factors. 
 
 Data augmentation reduced performance on the outdoor test set across all architectures while maintaining comparable performance during training. For ResNet18, augmentation reduced test accuracy from 0.685 to 0.466, a decrease of 0.219. Similar decreases were observed for SimpleNet and LargerNet. This pattern differs from the common observation that augmentation improves generalization.
 
-This result may be explained by a mismatch between the augmentation strategies and the characteristics of the test domain. The augmentation techniques applied during training included random rotations, color jittering, and cropping. These transformations may not reflect the distribution shift between indoor ImageNet images and outdoor photographs. Outdoor images differ from ImageNet images in lighting conditions, background complexity, and perspective variations. The applied augmentations may have reduced the model's ability to learn features relevant to the outdoor test distribution.
+This result may be explained by a mismatch between the augmentation strategies and the characteristics of the test domain. The augmentation techniques applied during training included random flipping, color jittering, and cropping. These transformations may not reflect the distribution shift between indoor ImageNet images and outdoor photographs. Outdoor images differ from ImageNet images in lighting conditions, background complexity, and perspective variations. The applied augmentations may have reduced the model's ability to learn features relevant to the outdoor test distribution.
 
 The per-class analysis shows variation in classification performance across object categories in outdoor settings. Wooden Spoon and Toilet Tissue achieved higher accuracy than other classes. Classes such as Teapot, Mouse, Soup Bowl, and Computer Keyboard showed lower accuracy and higher confusion rates. The confusion matrix shows that teapots were misclassified as coffee mugs in 22 instances, notebooks as binders in 13 instances, and binders as notebooks in 12 instances. Computer keyboards were misclassified as remote controls in 17 instances. These confusions occur between objects with similar shapes, which suggests that shape-based features may be insufficient when objects share geometric properties or when outdoor conditions alter visual appearance.
 
@@ -355,7 +361,14 @@ Third, the evaluation was limited to accuracy, per-class accuracy, and ROC-AUC m
 
 Finally, the outdoor test set contained images collected by students in the timespan between October and December. This may introduce biases in photographing style, object selection, and environmental conditions. A larger and more diverse test set would provide additional insight into model generalization.
 
-\section{Conclusion (E)}
+\section{Conclusion (D)}
+In this project, we compared different convolutional neural network architectures and evaluated the impact of data augmentation on image classification performance. The results show clear differences between pretrained and custom-trained models. ResNet18 consistently achieved the best performance on both validation and outdoor test data, while SimpleNet and LargerNet showed lower generalization capability, especially under domain shift.
+
+The evaluation on the self-collected outdoor dataset highlights the importance of robust feature representations when models are applied to data outside the original training distribution. While data augmentation helped reduce overfitting during training, it consistently reduced performance on the outdoor test dataset. This suggests that generic augmentation strategies are not always sufficient when the target domain differs strongly from the training data.
+
+Future work could focus on collecting more diverse training data and exploring augmentation strategies that better reflect real-world outdoor conditions. In addition, further analysis of model errors could help to better understand failure cases and improve model robustness.
+
+
 
 
 \newpage
