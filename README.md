@@ -18,7 +18,7 @@ pip install torch torchvision pillow scikit-learn numpy pandas matplotlib
 ## Project Structure
 
 The project is organized as follows:
-
+```
 project-root/
 │
 ├── data/                     # Training and testing images
@@ -34,6 +34,8 @@ project-root/
 ├── .gitattributes
 ├── LICENSE
 └── README.md
+```
+
 
 
 ## Test image naming conventions
