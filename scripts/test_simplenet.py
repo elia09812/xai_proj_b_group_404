@@ -5,9 +5,8 @@ from torch.utils.data import DataLoader
 
 from ml_shared import build_simplenet_for_10_classes, ImageDataset, get_device
 
-# 1) Ich setze hier die absoluten Pfade zu Testdaten und Checkpoint
-TEST_ROOT = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/xai_proj_b_group_404/data/collected_dataset"
-CKPT_PATH = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/kaggl results/SimpleNet/Without Augmentation/SimpleNet.pth"
+TEST_ROOT = "data/collected_dataset"
+CKPT_PATH = "results/SimpleNet/Without Augmentation/SimpleNet.pth"
 
 NUM_CLASSES = 10
 
@@ -30,7 +29,6 @@ def main():
     correct = 0
     total = 0
 
-    # pro Bild: filename, y_true, y_pred, confidence, p_true, p0..p9
     all_rows = []
 
     with torch.no_grad():
@@ -39,7 +37,7 @@ def main():
             labels = labels.to(device)
 
             logits = model(images)
-            probs = torch.softmax(logits, dim=1)  # (B, 10)
+            probs = torch.softmax(logits, dim=1)  
 
             pred = probs.argmax(dim=1)
             conf = probs.max(dim=1).values
@@ -59,15 +57,15 @@ def main():
                     p_true.cpu().tolist(),
                 )
             ):
-                row = [fn, yt, yp, cf, pt] + probs_cpu[i]  # p0..p9
+                row = [fn, yt, yp, cf, pt] + probs_cpu[i]  
                 all_rows.append(row)
 
     acc = correct / total if total else 0.0
     print(f"Test Accuracy: {acc:.4f} ({correct}/{total})")
 
-    # 7) CSV speichern (Excel-DE friendly: Semikolon)
-    os.makedirs("eval_outputs", exist_ok=True)
-    out_csv = "eval_outputs/simplenet_predictions.csv"
+
+    os.makedirs("eval_outputs_allPictures", exist_ok=True)
+    out_csv = "eval_outputs_allPictures/simplenet_predictions.csv"
 
     header = ["filename", "y_true", "y_pred", "confidence", "p_true"] + [f"p{i}" for i in range(NUM_CLASSES)]
     with open(out_csv, "w", newline="", encoding="utf-8-sig") as f:

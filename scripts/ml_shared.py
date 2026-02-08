@@ -8,9 +8,6 @@ from torch import nn
 from typing import Tuple
 
 
-# Mapping von Klassenname → Klassenindex
-# Das ist exakt das gleiche Mapping wie im Training,
-# damit Vorhersagen und Ground Truth vergleichbar bleiben.
 LABELS_MAP = {
     "coffee-mug": 0,
     "notebook": 1,
@@ -24,17 +21,10 @@ LABELS_MAP = {
     "toilet-tissue": 9,
 }
 
-# Um später von Index wieder auf Klassenname zu kommen (für Plots / Reports)
 IDX_TO_CLASS = {v: k for k, v in LABELS_MAP.items()}
 
 
 def get_device() -> torch.device:
-    """
-    Ich wähle automatisch das beste verfügbare Device:
-    - CUDA, falls vorhanden (NVIDIA GPU)
-    - sonst MPS auf dem Mac (Apple Silicon)
-    - sonst CPU
-    """
     if torch.cuda.is_available():
         return torch.device("cuda")
     if torch.backends.mps.is_available():
@@ -43,16 +33,10 @@ def get_device() -> torch.device:
 
 
 class ImageDataset(Dataset):
-    """
-    Dataset-Klasse, identisch zur Trainingslogik.
-    Für das Testen gebe ich zusätzlich den Dateinamen zurück,
-    damit ich später pro Bild Vorhersagen analysieren kann.
-    """
     def __init__(self, root: str, transform=None, train: bool = True):
         self.train = train
         self.root = root
 
-        # Alle Bilddateien im Ordner sammeln
         self.file_names = sorted(
             f for f in os.listdir(self.root)
             if f.lower().endswith((".jpg", ".jpeg", ".png"))
@@ -64,8 +48,6 @@ class ImageDataset(Dataset):
         img_name = self.file_names[idx]
         img_path = os.path.join(self.root, img_name)
 
-        # Label aus dem Dateinamen extrahieren
-        # (gleiches Schema wie im Training)
         if self.train:
             label_str = img_name.split("_")[0]
         else:
@@ -73,12 +55,10 @@ class ImageDataset(Dataset):
 
         label = torch.tensor(LABELS_MAP[label_str], dtype=torch.long)
 
-        # Bild laden und Transform anwenden
         image = Image.open(img_path).convert("RGB")
         if self.transform:
             image = self.transform(image)
 
-        # Fürs Testen gebe ich auch den Dateinamen zurück
         return image, label, img_name
 
     def __len__(self):
@@ -158,13 +138,7 @@ class LargerNet(nn.Module):
 
 
 def build_resnet18_for_10_classes():
-    """
-    Ich baue hier exakt das gleiche ResNet18 wie im Training:
-    - Vortrainierte ImageNet-Gewichte
-    - Letzte Fully-Connected-Schicht auf 10 Klassen geändert
-    - Die ImageNet-Transforms werden mit zurückgegeben,
-      damit Training und Test identisch vorverarbeitet werden.
-    """
+  
     weights = models.ResNet18_Weights.IMAGENET1K_V1
     preprocess = weights.transforms()
 
@@ -174,15 +148,9 @@ def build_resnet18_for_10_classes():
     return model, preprocess
 
 def build_simplenet_for_10_classes():
-    """
-    Ich baue hier mein SimpleCNN und nutze für Tests dieselben
-    Preprocess-Transforms wie im SimpleCNN-Training.
-    """
-    # NOTE: wenn SimpleCNN-Klasse in ml_shared steht, einfach verwenden:
+
     model = SimpleCNN(num_classes=10)
 
-    # SimpleCNN hat keine festen "ImageNet weights.transforms()".
-    # Ich setze hier die gleiche Eval-Transform wie in deinem SimpleCNN-Notebook:
     from torchvision import transforms
     preprocess = transforms.Compose([
         transforms.Resize((256, 256)),
@@ -193,12 +161,7 @@ def build_simplenet_for_10_classes():
     return model, preprocess
 
 def build_largernet_for_10_classes():
-    """
-    Ich baue hier LargerNet für 10 Klassen.
-    Als Preprocess nutze ich den gleichen Standard wie im SimpleCNN-Test:
-    Resize 256x256 + Normalize auf mean/std 0.5.
-    (Falls ihr beim LargerNet andere Transforms hattet, müssen wir das angleichen.)
-    """
+   
     model = LargerNet(num_classes=10)
 
     from torchvision import transforms
@@ -212,27 +175,17 @@ def build_largernet_for_10_classes():
 
 
 
-
-# Ich nutze hier einen zentralen "Model Builder", damit meine Testskripte später
-# einfach model = build_model("resnet18") machen können.
 def build_model(model_name: str) -> Tuple[nn.Module, object]:
-    """
-    Gibt (model, preprocess) zurück.
-    preprocess ist die Transform-Pipeline, die ich beim Testen anwenden muss,
-    damit es exakt wie im Training ist.
-    """
+
     name = model_name.lower()
 
     if name == "resnet18":
         return build_resnet18_for_10_classes()
 
     if name == "simplenet":
-        # TODO: wenn du SimpleCNN schon in ml_shared hast, hier zurückgeben.
-        # Falls nicht, kann ich dir gleich eine build_simplenet() hinzufügen.
         return build_simplenet_for_10_classes()
 
     if name == "largernet":
-        # TODO: das ist der Platzhalter für eure LargerNet-Architektur.
         return build_largernet_for_10_classes()
 
     raise ValueError(f"Unknown model_name: {model_name}")

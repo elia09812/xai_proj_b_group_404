@@ -5,9 +5,8 @@ from torch.utils.data import DataLoader
 
 from ml_shared import build_largernet_for_10_classes, ImageDataset, get_device
 
-# 1) Ich setze hier die absoluten Pfade zu Testdaten und Checkpoint
-TEST_ROOT = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/xai_proj_b_group_404/data/collected_dataset"
-CKPT_PATH = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/kaggl results/LargerNet/Without Augmentation/LargerNet.pth"
+TEST_ROOT = "data/collected_dataset"
+CKPT_PATH = "results/LargerNet/With Augmentation/LargerNet_aug.pth"
 
 NUM_CLASSES = 10
 
@@ -63,8 +62,8 @@ def main():
     acc = correct / total if total else 0.0
     print(f"Test Accuracy: {acc:.4f} ({correct}/{total})")
 
-    os.makedirs("eval_outputs", exist_ok=True)
-    out_csv = "eval_outputs/largernet_predictions.csv"
+    os.makedirs("eval_outputs_allPictures", exist_ok=True)
+    out_csv = "eval_outputs_allPictures/largernet_predictions_aug.csv"
 
     header = ["filename", "y_true", "y_pred", "confidence", "p_true"] + [f"p{i}" for i in range(NUM_CLASSES)]
     with open(out_csv, "w", newline="", encoding="utf-8-sig") as f:

@@ -5,9 +5,9 @@ from torch.utils.data import DataLoader
 
 from ml_shared import build_resnet18_for_10_classes, ImageDataset, get_device
 
-# 1) die absoluten Pfade zu Testdaten und Checkpoint
-TEST_ROOT = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/xai_proj_b_group_404/data/collected_dataset"
-CKPT_PATH = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/kaggl results/ResNet18/Without Augmentation/ResNet18.pth"
+
+TEST_ROOT = "data/collected_dataset"
+CKPT_PATH = "results/ResNet18/With Augmentation/ResNet18_aug.pth"
 
 NUM_CLASSES = 10
 
@@ -29,7 +29,7 @@ def main():
 
     correct = 0
     total = 0
-    all_rows = []  # pro Bild eine Zeile für CSV
+    all_rows = []  
 
     with torch.no_grad():
         for images, labels, filenames in test_loader:
@@ -37,12 +37,12 @@ def main():
             labels = labels.to(device)
 
             logits = model(images)
-            probs = torch.softmax(logits, dim=1)  # (B, 10)
+            probs = torch.softmax(logits, dim=1)  
 
             pred = probs.argmax(dim=1)
             conf = probs.max(dim=1).values
             p_true = probs[torch.arange(probs.size(0)), labels]
-            p_pred = probs[torch.arange(probs.size(0)), pred]  # == conf
+            p_pred = probs[torch.arange(probs.size(0)), pred]  
 
             correct += (pred == labels).sum().item()
             total += labels.size(0)
@@ -59,17 +59,15 @@ def main():
                     p_pred.cpu().tolist(),
                 )
             ):
-                # row: base cols + p0..p9
                 row = [fn, yt, yp, cf, pt, pp] + probs_cpu[i]
                 all_rows.append(row)
 
     acc = correct / total if total > 0 else 0.0
     print(f"Test Accuracy: {acc:.4f} ({correct}/{total})")
 
-    # CSV speichern (Excel-DE friendly: Semikolon + utf-8-sig)
-    out_dir = "eval_outputs"
+    out_dir = "eval_outputs_allPictures"
     os.makedirs(out_dir, exist_ok=True)
-    out_csv = os.path.join(out_dir, "resnet18_predictions.csv")
+    out_csv = os.path.join(out_dir, "resnet18_predictions_aug.csv")
 
     header = ["filename", "y_true", "y_pred", "confidence", "p_true", "p_pred"] + [f"p{i}" for i in range(NUM_CLASSES)]
     with open(out_csv, "w", newline="", encoding="utf-8-sig") as f:

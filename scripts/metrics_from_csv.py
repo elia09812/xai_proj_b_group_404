@@ -15,12 +15,12 @@ from sklearn.metrics import (
 from sklearn.preprocessing import label_binarize
 
 CSV_FILES = [
-    "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/largernet_predictions_aug.csv",
-    "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/largernet_predictions.csv",
-    "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/resnet18_predictions_aug.csv",
-    "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/resnet18_predictions.csv",
-    "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/simplenet_predictions_aug.csv",
-    "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/simplenet_predictions.csv",
+    "eval_outputs_allPictures/largernet_predictions_aug.csv",
+    "eval_outputs_allPictures/largernet_predictions.csv",
+    "eval_outputs_allPictures/resnet18_predictions_aug.csv",
+    "eval_outputs_allPictures/resnet18_predictions.csv",
+    "eval_outputs_allPictures/simplenet_predictions_aug.csv",
+    "eval_outputs_allPictures/simplenet_predictions.csv",
 ]
 
 IDX_TO_CLASS = {
@@ -38,10 +38,9 @@ IDX_TO_CLASS = {
 N_CLASSES = 10
 CLASS_NAMES = [IDX_TO_CLASS[i] for i in range(N_CLASSES)]
 
-OUT_DIR = "/Users/dominicschlegel/Documents/WiSe25_26/ProjectML/eval_outputs/analysis"
+OUT_DIR = "eval_outputs_allPicutres/analysis"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# Optional: set False if you only want AUC numbers, no ROC curve plots
 SAVE_ROC_PLOTS = True
 
 
@@ -110,7 +109,7 @@ def plot_roc_ovr(y_true: np.ndarray, y_score: np.ndarray, title: str, out_path: 
 
     fig, ax = plt.subplots(figsize=(9, 6))
     for c in range(N_CLASSES):
-        # need both positives & negatives
+        
         if len(np.unique(y_true_bin[:, c])) < 2:
             continue
         fpr, tpr, _ = roc_curve(y_true_bin[:, c], y_score[:, c])
@@ -140,7 +139,6 @@ def summarize_one(df: pd.DataFrame):
 
     acc = accuracy_score(y_true, y_pred)
 
-    # You can keep these (or remove later)
     f1_macro = f1_score(y_true, y_pred, average="macro", zero_division=0)
     f1_weighted = f1_score(y_true, y_pred, average="weighted", zero_division=0)
 
@@ -151,7 +149,7 @@ def summarize_one(df: pd.DataFrame):
         row_sum = cm[i, :].sum()
         per_class_acc[IDX_TO_CLASS[i]] = cm[i, i] / row_sum if row_sum > 0 else float("nan")
 
-    # --- ROC-AUC (multiclass OvR) ---
+   
     prob_cols = [f"p{i}" for i in range(N_CLASSES)]
     has_probs = all(c in df.columns for c in prob_cols)
 
@@ -163,14 +161,12 @@ def summarize_one(df: pd.DataFrame):
     if has_probs:
         y_score = df[prob_cols].to_numpy(dtype=float)
 
-        # If they are proper probabilities, rows sum to ~1; otherwise, still works as "scores"
         y_true_bin = label_binarize(y_true, classes=list(range(N_CLASSES)))
 
         try:
             auc_macro = roc_auc_score(y_true_bin, y_score, average="macro", multi_class="ovr")
             auc_micro = roc_auc_score(y_true_bin, y_score, average="micro", multi_class="ovr")
         except ValueError:
-            # can happen if a class is missing in y_true
             auc_macro = float("nan")
             auc_micro = float("nan")
 
@@ -216,14 +212,13 @@ def main():
         pca_path = os.path.join(OUT_DIR, f"{tag}_per_class_accuracy.png")
         plot_per_class_accuracy(per_class_acc, f"Per-class Accuracy — {tag}", pca_path)
 
-        # ROC plot (optional)
+        # ROC plot 
         if SAVE_ROC_PLOTS and has_probs and y_score is not None:
             roc_path = os.path.join(OUT_DIR, f"{tag}_roc_ovr.png")
             plot_roc_ovr(y_true, y_score, f"ROC (OvR) — {tag}", roc_path)
         elif SAVE_ROC_PLOTS and not has_probs:
             print(f"[{tag}] No p0..p9 columns found -> skipping ROC plot & AUC.")
 
-        # Long tables
         for cls_name, cls_acc in per_class_acc.items():
             per_class_table_rows.append({"model": tag, "class": cls_name, "class_accuracy": cls_acc})
 
