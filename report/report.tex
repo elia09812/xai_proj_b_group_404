@@ -107,10 +107,10 @@ This project investigates the impact of convolutional neural network architectur
 Three different models were evaluated: a simple custom CNN (SimpleNet), an extended CNN with regularization techniques (LargerNet), and a pretrained ResNet18 model. 
 All models were trained on a subset of ImageNet containing approximately 13,000 images across ten classes of everyday objects.
 
-To evaluate model generalization, performance was measured on validation data. All models were tested on a separately collected outdoor test dataset consisting of 949 images captured by student groups. 
+To evaluate model generalization, performance was measured on validation data. All models were tested on a separately collected outdoor test dataset consisting of 4409 images captured by student groups. 
 Model performance was assessed using accuracy, per-class accuracy, confusion matrices, and ROC-AUC scores.
 
-The results show that ResNet18 significantly outperformed both custom architectures on validation and test data. 
+The results show that ResNet18 clearly outperformed both custom architectures on validation and test data. 
 While data augmentation had limited impact on validation performance, it reduced performance on the outdoor test dataset for all models.
 
 These findings suggest that pretrained feature representations are more robust under domain shift compared to models trained from scratch on limited data.
@@ -263,7 +263,7 @@ AUC / ROC & 0.785 & 0.683 & 0.838 & 0.848 & 0.994 & 0.992 \\
 
 All results in this section are based solely on the self-collected outdoor test dataset. This dataset was not used during training or validation and differs from the ImageNet-based training data in terms of environment and image conditions.
 
-The self-collected test dataset consists of 949 outdoor images covering the same ten object classes as the training data. All images were captured by four independent student groups in real-world outdoor environments. The dataset includes variations in background, lighting, and viewpoints and was used exclusively to evaluate model performance under domain shift.
+The self-collected test dataset consists of 4409 outdoor images covering the same ten object classes as the training data. All images were captured by four independent student groups in real-world outdoor environments. The dataset includes variations in background, lighting, and viewpoints and was used exclusively to evaluate model performance under domain shift.
 
 The evaluation aims to analyze how well the trained models generalize to unseen outdoor data. Performance is reported using overall accuracy, confusion matrices, per-class accuracy, and ROC-AUC scores.
 
@@ -272,7 +272,7 @@ Performance on the self-collected outdoor test dataset is compared across all ev
 
 Table~\ref{tab:test_results} reports the overall classification accuracy and ROC-AUC scores for SimpleNet, LargerNet and ResNet18. Each model is evaluated with and without data augmentation.
 
-Across all evaluation settings, ResNet18 achieves the highest performance on the outdoor test set in terms of both accuracy and ROC-AUC. The two custom architectures, SimpleNet and LargerNet show lower performance on the same data. LargerNet consistently outperforms SimpleNet, while both remain clearly below the performance level of ResNet18. 
+Across all evaluation settings, ResNet18 achieves the highest performance on the outdoor test set in terms of both accuracy and ROC-AUC. The two custom architectures, SimpleNet and LargerNet show lower performance on the same data. LargerNet slightly outperforms SimpleNet, while both remain clearly below the performance level of ResNet18. 
 
 The relative performance ordering of the evaluated architectures remains consistent across both evaluation metrics.
 
@@ -281,8 +281,8 @@ The relative performance ordering of the evaluated architectures remains consist
 \caption{Test results on the self-collected outdoor dataset for different neural network architectures with and without data augmentation.}
 \label{tab:test_results}
 
-\setlength{\tabcolsep}{8pt}           % horizontal padding 
-\renewcommand{\arraystretch}{1.15}    % vertical padding
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.15}
 
 \begin{tabular}{lcccccc}
 \hline
@@ -290,13 +290,11 @@ The relative performance ordering of the evaluated architectures remains consist
 \cline{2-7}
 \textbf{Augmentation} & Yes & No & Yes & No & Yes & No \\
 \hline
-Accuracy      & 0.125 & 0.154 & 0.162 & 0.203 & 0.466 & 0.685 \\[2pt]
-ROC-AUC (OvR) & 0.566 & 0.608 & 0.600 & 0.629 & 0.886 & 0.955 \\
+Accuracy      & 0.124 & 0.141 & 0.140 & 0.155 & 0.326 & 0.467 \\[2pt]
+ROC-AUC (OvR) & 0.554 & 0.560 & 0.569 & 0.582 & 0.770 & 0.847 \\
 \hline
 \end{tabular}
 \end{table}
-
-
 
 
 
@@ -311,7 +309,7 @@ Class separability is analyzed using the best-performing model, ResNet18 without
 
 Figure~\ref{fig:per_class_accuracy_resnet18} shows the per-class classification accuracy on the outdoor test dataset.
 The figure indicates noticeable differences in classification performance across object categories.
-While classes such as computer-keyboard and mouse achieve comparatively high accuracy, other classes such as binder and notebook show lower accuracy values, suggesting that these classes are more difficult to distinguish in outdoor settings.
+While classes such as wooden-spoon and toilet-tissue achieve comparatively high accuracy, other classes such as soup-bowl and teapot show lower accuracy values, suggesting that these classes are more difficult to distinguish in outdoor settings.
 
 \begin{figure}[h]
 \centering
@@ -333,24 +331,24 @@ However, several off-diagonal entries reveal recurring confusions between specif
 \end{figure}
 
 
-In particular, images of teapots are frequently misclassified as coffee mugs, with 22 such cases visible in the confusion matrix.
-Similarly, notebooks are misclassified as binders in 12 instances, while binders are predicted as notebooks in 13 instances.
-Another prominent confusion occurs between computer keyboards and remote controls, where 17 keyboard images are classified as remote controls.
+In particular, images of teapots are frequently misclassified as toilet tissue, with 160 such cases visible in the confusion matrix. 
+Similarly, coffee mugs are misclassified as toilet tissue in 121 instances, while binders are predicted as notebooks in 79 instances. 
+Another prominent confusion occurs between computer keyboards and remote controls, where 77 keyboard images are classified as remote controls.
 These confusion patterns correspond to the lower per-class accuracy values observed for the affected classes in Figure~\ref{fig:per_class_accuracy_resnet18}.
 
 \section{Discussion}
 \subsection{Discoveries (M)}
 The experimental results show distinct performance differences between the evaluated architectures and provide insight into the effects of domain shift on model generalization.
 
-ResNet18 outperformed both custom architectures across all evaluation settings. On the validation data, ResNet18 achieved an accuracy of 0.893 (augmented) and 0.879 (non-augmented), compared to LargerNet's 0.447--0.476 and SimpleNet's 0.279--0.367. This performance difference increased on the outdoor test set, where ResNet18 achieved accuracies of 0.466 and 0.685 while both custom architectures remained below 0.203. The ROC-AUC analysis shows a similar pattern, with ResNet18 achieving 0.955 (non-augmented) on the test set compared to 0.629 for LargerNet and 0.608 for SimpleNet. These results indicate that pretrained features from ImageNet transfer to the outdoor domain more effectively than features learned from scratch on the limited training data.
+ResNet18 outperformed both custom architectures across all evaluation settings. On the validation data, ResNet18 achieved an accuracy of 0.893 (augmented) and 0.879 (non-augmented), compared to LargerNet's 0.447--0.476 and SimpleNet's 0.279--0.367. This performance difference increased on the outdoor test set, where ResNet18 achieved accuracies of 0.326 and 0.467 while both custom architectures remained below 0.155. The ROC-AUC analysis shows a similar pattern, with ResNet18 achieving 0.847 (non-augmented) on the test set compared to 0.582 for LargerNet and 0.560 for SimpleNet. These results indicate that pretrained features from ImageNet transfer to the outdoor domain more effectively than features learned from scratch on the limited training data.
 
 The performance of ResNet18 can be attributed to several architectural factors. The residual connections enable gradient flow during backpropagation, which facilitates the learning of deeper feature hierarchies \citep{liang2020image}. The pretrained weights provide initialization with features learned from a larger dataset. The model's higher parameter count allows for more complex decision boundaries. In contrast, SimpleNet and LargerNet were trained from scratch on approximately 13,000 images, which limited their ability to learn generalizable features.
 
-Data augmentation reduced performance on the outdoor test set across all architectures while maintaining comparable performance during training. For ResNet18, augmentation reduced test accuracy from 0.685 to 0.466, a decrease of 0.219. Similar decreases were observed for SimpleNet and LargerNet. This pattern differs from the common observation that augmentation improves generalization.
+Data augmentation reduced performance on the outdoor test set across all architectures while maintaining comparable performance during training. For ResNet18, augmentation reduced test accuracy from 0.467 to 0.326, a decrease of 0.141. Similar decreases were observed for SimpleNet and LargerNet. This pattern differs from the common observation that augmentation improves generalization.
 
 This result may be explained by a mismatch between the augmentation strategies and the characteristics of the test domain. The augmentation techniques applied during training included random flipping, color jittering, and cropping. These transformations may not reflect the distribution shift between indoor ImageNet images and outdoor photographs. Outdoor images differ from ImageNet images in lighting conditions, background complexity, and perspective variations. The applied augmentations may have reduced the model's ability to learn features relevant to the outdoor test distribution.
 
-The per-class analysis shows variation in classification performance across object categories in outdoor settings. Wooden Spoon and Toilet Tissue achieved higher accuracy than other classes. Classes such as Teapot, Mouse, Soup Bowl, and Computer Keyboard showed lower accuracy and higher confusion rates. The confusion matrix shows that teapots were misclassified as coffee mugs in 22 instances, notebooks as binders in 13 instances, and binders as notebooks in 12 instances. Computer keyboards were misclassified as remote controls in 17 instances. These confusions occur between objects with similar shapes, which suggests that shape-based features may be insufficient when objects share geometric properties or when outdoor conditions alter visual appearance.
+The per-class analysis shows variation in classification performance across object categories in outdoor settings. Wooden Spoon and Toilet Tissue achieved higher accuracy than other classes. Classes such as Teapot, Mouse, Soup Bowl, and Computer Keyboard showed lower accuracy and higher confusion rates. The confusion matrix shows that teapots were misclassified as toilet tissue in 160 instances, coffee mugs as toilet tissue in 121 instances, binders as notebooks in 79 instances, and computer keyboards as remote controls in 77 instances. These confusions occur between objects with similar shapes, which suggests that shape-based features may be insufficient when objects share geometric properties or when outdoor conditions alter visual appearance.
 
 \subsection{Limitations (M)}
 The study has several limitations. First, the custom architectures were trained from scratch on approximately 13,000 images. This limited the models' ability to learn generalizable features, particularly for SimpleNet, which stopped training after 8 epochs in the non-augmented setting. LargerNet employed batch normalization and dropout, but performance remained below ResNet18, which was pretrained on the full ImageNet dataset.
