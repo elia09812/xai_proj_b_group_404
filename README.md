@@ -15,6 +15,31 @@ This project requires Python 3 and the following libraries:
 You can install the required packages with:
 pip install torch torchvision pillow scikit-learn numpy pandas matplotlib
 
+## Project Structure
+The project is organized as follows:
+
+project-root/
+│
+├── data/                     # Training and testing images
+|
+├── eval_outputs/          	  # Evaluation results shown in the presentation
+│
+├── eval_outputs_allPictures/ # Evaluation results shown in the report
+│
+├── report/                   # LaTeX files for the project report
+│
+├── results/                  # Training logs and final model weights
+|
+├── scripts/                  # Notebooks and Python scripts for training and evaluation
+│
+├── src/                      # Models and dataset classes
+│   ├── models/
+│   └── datasets/
+│
+├── .gitattributes
+├── LICENSE
+└── README.md
+
 ## Test image naming conventions
 -  `StudentID`
 	- FRPK: Elia Maximilian Stamm
